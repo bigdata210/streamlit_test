@@ -1,0 +1,9 @@
+
+@font-face {
+    font-family: 'MyCustomFont';
+    src: url('./KoPubDotumMedium.ttf') format('truetype');
+}
+
+body {
+    font-family: 'MyCustomFont', sans-serif;
+}
