@@ -1,0 +1,10 @@
+pandas
+numpy
+folium[plugins]
+streamlit-folium
+Pillow
+matplotlib
+openpyxl
+streamlit-option-menu
+streamlit-extras
+streamlit-jupyter
