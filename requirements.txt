@@ -8,3 +8,4 @@ openpyxl
 streamlit-option-menu
 streamlit-extras
 streamlit-jupyter
+xlsxwriter
