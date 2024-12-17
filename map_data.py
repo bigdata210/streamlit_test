@@ -109,49 +109,47 @@ def prioirty_color(row):
 # #### (2) 사업종료연도가 최신인 데이터만 추가로 저장
 
 def pilot_invited_filter():
-    pilot_data = pilot_village[['대상국가', '사업시작연도', '사업종료연도']]
-    invited_data = invited_train[['초청연수_국가명1', '초청연수_국가명2', '초청연수_국가명3', '초청연수_국가명4', '초청연수_국가명5', '사업연도']]
-    ### 시범마을 데이터 ###
-    # 시범마을 데이터에 존재하는 국가만 필터링
-    country_info_data = pilot_data[pilot_data['대상국가'].isin(country_data['국가명'])]
+    # 시범마을 데이터 컬럼이 이미 존재하면 덮어쓰지 않기
+    if '시범마을시작연도' not in country_data.columns or '시범마을종료연도' not in country_data.columns:
+        pilot_data = pilot_village[['대상국가', '사업시작연도', '사업종료연도']]
+        # 시범마을 데이터에 존재하는 국가만 필터링
+        country_info_data = pilot_data[pilot_data['대상국가'].isin(country_data['국가명'])]
 
-    # 종료연도 기준으로 최신데이터 선택
-    latest_data = country_info_data.loc[country_info_data.groupby('대상국가')['사업종료연도'].idxmax()]
-    
-    # 수원국 데이터에 추가
-    for index,row in latest_data.iterrows():
-        country_data.loc[country_data['국가명'] == row['대상국가'], '사업시작연도'] = row['사업시작연도']
-        country_data.loc[country_data['국가명'] == row['대상국가'], '사업종료연도'] = row['사업종료연도']
+        # 종료연도 기준으로 최신데이터 선택
+        latest_data = country_info_data.loc[country_info_data.groupby('대상국가')['사업종료연도'].idxmax()]
+
+        # 수원국 데이터에 추가
+        for index, row in latest_data.iterrows():
+            country_data.loc[country_data['국가명'] == row['대상국가'], '시범마을시작연도'] = row['사업시작연도']
+            country_data.loc[country_data['국가명'] == row['대상국가'], '시범마을종료연도'] = row['사업종료연도']
+
+        # 사업시작연도, 사업종료연도 타입 변경
+        country_data['시범마을시작연도'] = country_data['시범마을시작연도'].astype('Int64')
+        country_data['시범마을종료연도'] = country_data['시범마을종료연도'].astype('Int64')
+
+    # 초청연수 데이터 컬럼이 이미 존재하면 덮어쓰지 않기
+    if '초청연수연도' not in country_data.columns:
+        invited_data = invited_train[['초청연수_국가명1', '초청연수_국가명2', '초청연수_국가명3', '초청연수_국가명4', '초청연수_국가명5', '사업연도']]
         
-    # 사업시작연도, 사업종료연도 타입 변경
-    country_data['사업시작연도'] = country_data['사업시작연도'].astype('Int64')
-    country_data['사업종료연도'] = country_data['사업종료연도'].astype('Int64')
-    
-    # 사업시작연도, 사업종료연도 이름 변경
-    country_data.rename(columns={'사업시작연도':'시범마을시작연도', '사업종료연도':'시범마을종료연도'}, inplace=True)
-    
-    ### 초청연수 데이터 ###
-    # 각 국가별로 단일로 저장
-    single_country = invited_data.melt(id_vars=['사업연도'],
-                                       value_vars=['초청연수_국가명1', '초청연수_국가명2', '초청연수_국가명3', 
-                                                   '초청연수_국가명4', '초청연수_국가명5'],
-                                       var_name = 'source', value_name='국가명')
-    
-    # NaN 값 제거 및 인덱스 초기화
-    single_country = single_country.dropna(subset=['국가명'])
-    
-    # 종료연도 기준으로 최신데이터 선택
-    latest_data = single_country.loc[single_country.groupby('국가명')['사업연도'].idxmax()]
-    
-    # 수원국 데이터에 추가
-    for index, row in latest_data.iterrows():
-        country_data.loc[country_data['국가명'] == row['국가명'], '사업연도'] = row['사업연도']
-        
-    # 사업시작연도, 사업종료연도 타입 변경
-    country_data['사업연도'] = country_data['사업연도'].astype('Int64')
-    
-    # 사업시작연도, 사업종료연도 이름 변경
-    country_data.rename(columns={'사업연도':'초청연수연도'}, inplace=True)
+        # 각 국가별로 단일로 저장
+        single_country = invited_data.melt(id_vars=['사업연도'],
+                                           value_vars=['초청연수_국가명1', '초청연수_국가명2', '초청연수_국가명3', 
+                                                       '초청연수_국가명4', '초청연수_국가명5'],
+                                           var_name = 'source', value_name='국가명')
+
+        # NaN 값 제거 및 인덱스 초기화
+        single_country = single_country.dropna(subset=['국가명'])
+
+        # 종료연도 기준으로 최신데이터 선택
+        latest_data = single_country.loc[single_country.groupby('국가명')['사업연도'].idxmax()]
+
+        # 수원국 데이터에 추가
+        for index, row in latest_data.iterrows():
+            country_data.loc[country_data['국가명'] == row['국가명'], '초청연수연도'] = row['사업연도']
+
+        # 사업시작연도, 사업종료연도 타입 변경
+        country_data['초청연수연도'] = country_data['초청연수연도'].astype('Int64')
+
     return country_data
 
 
