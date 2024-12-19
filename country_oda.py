@@ -949,7 +949,7 @@ def invite_barchart(pivoted_data):
         <style>
         @font-face {
             font-family: 'NanumGothic';
-            src: url('/static/fonts/NanumGothic.ttf') format('truetype');
+            src: url('./static/fonts/NanumGothic.ttf') format('truetype');
         }
         body {
             font-family: 'NanumGothic', sans-serif;
