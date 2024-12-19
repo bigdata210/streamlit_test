@@ -945,17 +945,17 @@ def invite_df_result(df):
 # ### 4-4. 초청연수 막대그래프
 
 def invite_barchart(pivoted_data):
-    st.markdown("""
-        <style>
-        @font-face {
-            font-family: 'NanumGothic';
-            src: url('./static/fonts/NanumGothic.ttf') format('truetype');
-        }
-        body {
-            font-family: 'NanumGothic', sans-serif;
-        }
-        </style>
-        """, unsafe_allow_html=True)
+    # st.markdown("""
+    #     <style>
+    #     @font-face {
+    #         font-family: 'NanumGothic';
+    #         src: url('./static/fonts/NanumGothic.ttf') format('truetype');
+    #     }
+    #     body {
+    #         font-family: 'NanumGothic', sans-serif;
+    #     }
+    #     </style>
+    #     """, unsafe_allow_html=True)
         
     # '합계'와 '기관'을 제외한 연도별 데이터를 추출
     year_columns = [col for col in pivoted_data.columns if col not in ['기관', '합계']]
