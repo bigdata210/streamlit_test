@@ -945,7 +945,11 @@ def invite_df_result(df):
 # ### 4-4. 초청연수 막대그래프
 
 def invite_barchart(pivoted_data):
+    import shutil
+    
     # 폰트설정
+    cache_dir = matplotlib.get_cachedir()
+    shutil.rmtree(cache_dir)
     current_dir = os.getcwd()
     font_path = os.path.join(current_dir, 'screen_display_data', 'fonts', 'KoPubDotumMedium.ttf')
     
