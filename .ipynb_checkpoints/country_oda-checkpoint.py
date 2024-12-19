@@ -947,7 +947,7 @@ def invite_df_result(df):
 def invite_barchart(pivoted_data):
     import matplotlib as mpl
     # 폰트설정
-    font_path = "streamlit_test/static/fonts/NanumGothic.ttf"
+    font_path = os.path.join(os.getcwd(), 'static', 'fonts', 'NanumGothic.ttf')
     mpl.font_manager.fontManager.addfont(font_path)
     mpl.rcParams['font.family'] = 'NanumGothic'
     mpl.rcParams['axes.unicode_minus'] = False
