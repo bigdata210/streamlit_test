@@ -946,15 +946,14 @@ def invite_df_result(df):
 
 def invite_barchart(pivoted_data):
     # 폰트설정
-    plt.rcParams['font.family'] = 'Malgun Gothic'
-    plt.rcParams['axes.unicode_minus'] = False
+    # plt.rcParams['font.family'] = 'Malgun Gothic'
+    # plt.rcParams['axes.unicode_minus'] = False
 
-    st.legacy_caching.clear_cache()
     st.markdown("""
         <style>
         @font-face {
             font-family: 'NanumGothic';
-            src: url('./static/fonts/NanumGothic.ttf') format('truetype');
+            src: url('streamlit_test/static/fonts/NanumGothic.ttf') format('truetype');
         }
         body {
             font-family: 'NanumGothic', sans-serif;
