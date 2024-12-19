@@ -948,11 +948,11 @@ def invite_barchart(pivoted_data):
     import matplotlib as mpl
     # 폰트설정
     current_dir = os.getcwd()
-    font_path = os.path.join(current_dir, 'screen_display_data', 'fonts', 'NanumGothic.ttf')
+    font_path = os.path.join(current_dir, 'screen_display_data', 'fonts', 'KoPubDotumMedium.ttf')
     
     # Matplotlib에서 해당 폰트를 사용하도록 설정
     mpl.font_manager.fontManager.addfont(font_path)
-    mpl.rcParams['font.family'] = 'NanumGothic'
+    mpl.rcParams['font.family'] = 'KoPubDotumMedium'
     mpl.rcParams['axes.unicode_minus'] = False
     
     # '합계'와 '기관'을 제외한 연도별 데이터를 추출
