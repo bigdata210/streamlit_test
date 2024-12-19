@@ -951,7 +951,7 @@ def invite_barchart(pivoted_data):
     cache_dir = matplotlib.get_cachedir()
     shutil.rmtree(cache_dir)
     current_dir = os.getcwd()
-    font_path = os.path.join(current_dir, 'screen_display_data', 'fonts', 'KoPubDotumMedium.ttf')
+    font_path = os.path.join(current_dir, 'screen_display_data', 'fonts', 'NanumGothic.ttf')
     
     # 폰트 로드
     if os.path.exists(font_path):
