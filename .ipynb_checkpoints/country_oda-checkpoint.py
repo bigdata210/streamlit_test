@@ -945,16 +945,18 @@ def invite_df_result(df):
 # ### 4-4. 초청연수 막대그래프
 
 def invite_barchart(pivoted_data):
-    # 폰트설정
-    current_dir = os.getcwd()
-    font_path = os.path.join(current_dir, 'screen_display_data', 'fonts', 'KoPubDotumMedium.ttf')
-    
-    # 폰트 로드
-    if os.path.exists(font_path):
-        font_prop = fm.FontProperties(fname=font_path)
-        plt.rc('font', family=font_prop.get_name())
-        plt.rcParams['axes.unicode_minus'] = False  # 마이너스 기호 깨짐 방지
-    
+    st.markdown("""
+        <style>
+        @font-face {
+            font-family: 'NanumGothic';
+            src: url('/static/fonts/NanumGothic.ttf') format('truetype');
+        }
+        body {
+            font-family: 'NanumGothic', sans-serif;
+        }
+        </style>
+        """, unsafe_allow_html=True)
+        
     # '합계'와 '기관'을 제외한 연도별 데이터를 추출
     year_columns = [col for col in pivoted_data.columns if col not in ['기관', '합계']]
     # '기관'을 인덱스로 설정하여 연도별로 그룹화
