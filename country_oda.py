@@ -946,7 +946,7 @@ def invite_df_result(df):
 
 def invite_barchart(pivoted_data):
     import shutil
-    
+    import matplotlib
     # 폰트설정
     cache_dir = matplotlib.get_cachedir()
     shutil.rmtree(cache_dir)
