@@ -945,20 +945,14 @@ def invite_df_result(df):
 # ### 4-4. 초청연수 막대그래프
 
 def invite_barchart(pivoted_data):
-    import shutil
-    import matplotlib
     # 폰트설정
-    cache_dir = matplotlib.get_cachedir()
-    shutil.rmtree(cache_dir)
     current_dir = os.getcwd()
-    font_path = os.path.join(current_dir, 'screen_display_data', 'fonts', 'NanumGothic.ttf')
+    font_path = os.path.join(current_dir, 'screen_display_data', 'fonts', 'NanumGothic')
     
     # 폰트 로드
-    if os.path.exists(font_path):
-        font_prop = fm.FontProperties(fname=font_path)
-        print(f"Matplotlib에서 인식한 폰트 이름: {font_prop.get_name()}")
-    else:
-        print(f"폰트 파일을 찾을 수 없습니다: {font_path}")
+    font_prop = fm.FontProperties(fname=font_path)
+    plt.rc('font', family=font_prop.get_name())
+    plt.rcParams['axes.unicode_minus'] = False  # 마이너스 기호 깨짐 방지
     
     # '합계'와 '기관'을 제외한 연도별 데이터를 추출
     year_columns = [col for col in pivoted_data.columns if col not in ['기관', '합계']]
